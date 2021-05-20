@@ -1,7 +1,7 @@
-// import React from "react";
+import React from "react";
 
-// export default function ResultList(props) {
-  // console.log('===============',props.results);
+export default function ResultList(props) {
+  console.log('===============',props.results);
   // return (
   //   <ul className="list-group">
   //     {results.map((pers) => (
@@ -11,5 +11,5 @@
   //     ))}
   //   </ul>
   // )
-// }
+}
 

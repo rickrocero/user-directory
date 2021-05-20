@@ -2,6 +2,8 @@ import React from 'react';
 // import SearchForm from './components/SearchForm';
 // import ResultList from './components/ResultList';
 import API from './utils/API';
+import Wrapper from './components/Wrapper';
+import EmployeeCard from './components/EmployeeCard';
 
 class App extends React.Component {
   state = {
@@ -9,14 +11,14 @@ class App extends React.Component {
     results: []
   };
 
-  // When this component mounts, search the Random User API
+  // When this component mounts, hit the Random User API
   componentDidMount() {
     this.searchUser();
   }
 
   searchUser = () => {
     API.getUser()
-      .then((res) => console.log('***********', res.data.results))
+      .then((res) => this.setState({ results: [...res.data.results]}))
       .catch(err => console.log(err));
   };
 
@@ -35,7 +37,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Wrapper>
         <h1 className='text-center'>Employee Directory</h1>
         <hr/>
         {/* <SearchForm
@@ -44,7 +46,16 @@ class App extends React.Component {
           handleInputChange={this.handleInputChange}
         /> */}
         {/* <ResultList results={this.state.results} /> */}
-      </div>
+        {this.state.results.map(pers => (
+          <EmployeeCard
+            firstName={pers.name.first}
+            lastName={pers.name.last}
+            email={pers.email}
+            phone={pers.cell}
+            image={pers.picture.thumbnail}
+          />
+        ))}
+      </Wrapper>
     );
   }
 }
