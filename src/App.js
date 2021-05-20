@@ -1,24 +1,50 @@
+import React from 'react';
+import SearchForm from './components/SearchForm';
+import ResultList from './components/ResultList';
+import API from './utils/API';
 
+class App extends React.Component {
+  state = {
+    search: "",
+    results: []
+  };
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  // When this component mounts, search the Giphy API for pictures of kittens
+  componentDidMount() {
+    this.searchUser();
+  }
+
+  searchUser = query => {
+    API.search(query)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+  };
+
+  handleInputChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  // When the form is submitted, search the Giphy API for `this.state.search`
+  handleFormSubmit = event => {
+    event.preventDefault();
+  };
+
+  render() {
+    return (
+      <div>
+        <SearchForm
+          search={this.state.search}
+          handleFormSubmit={this.handleFormSubmit}
+          handleInputChange={this.handleInputChange}
+        />
+        <ResultList results={this.state.results} />
+      </div>
+    );
+  }
 }
 
 export default App;
