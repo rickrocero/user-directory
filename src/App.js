@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchForm from './components/SearchForm';
-import ResultList from './components/ResultList';
+// import SearchForm from './components/SearchForm';
+// import ResultList from './components/ResultList';
 import API from './utils/API';
 
 class App extends React.Component {
@@ -9,14 +9,14 @@ class App extends React.Component {
     results: []
   };
 
-  // When this component mounts, search the Giphy API for pictures of kittens
+  // When this component mounts, search the Random User API
   componentDidMount() {
     this.searchUser();
   }
 
-  searchUser = query => {
-    API.search(query)
-      .then(res => console.log(res.data))
+  searchUser = () => {
+    API.getUser()
+      .then((res) => console.log('***********', res.data.results))
       .catch(err => console.log(err));
   };
 
@@ -30,18 +30,20 @@ class App extends React.Component {
 
   // When the form is submitted, search the Giphy API for `this.state.search`
   handleFormSubmit = event => {
-    event.preventDefault();
+    event.preventDefault()
   };
 
   render() {
     return (
       <div>
-        <SearchForm
+        <h1 className='text-center'>Employee Directory</h1>
+        <hr/>
+        {/* <SearchForm
           search={this.state.search}
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
-        />
-        <ResultList results={this.state.results} />
+        /> */}
+        {/* <ResultList results={this.state.results} /> */}
       </div>
     );
   }

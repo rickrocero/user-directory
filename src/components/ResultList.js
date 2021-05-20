@@ -1,15 +1,15 @@
-import React from "react";
+// import React from "react";
 
-function ResultList(props) {
-  return (
-    <ul className="list-group">
-      {props.results.map(result => (
-        <li className="list-group-item" key={result.id}>
-          <img alt={result.title} className="img-fluid" src={result.images.original.url} />
-        </li>
-      ))}
-    </ul>
-  );
-}
+// export default function ResultList(props) {
+  // console.log('===============',props.results);
+  // return (
+  //   <ul className="list-group">
+  //     {results.map((pers) => (
+  //       <li className="list-group-item" key={pers.id}>
+  //         <img alt={pers.name.last} className="img-fluid" src={pers.picture.thumbnail} />
+  //       </li>
+  //     ))}
+  //   </ul>
+  // )
+// }
 
-export default ResultList;
